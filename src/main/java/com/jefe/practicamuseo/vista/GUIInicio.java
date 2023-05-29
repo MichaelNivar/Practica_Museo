@@ -17,7 +17,7 @@ import javax.swing.Timer;
 public class GUIInicio extends javax.swing.JFrame {
 
     Tiempo tiempo;
-    GUIJuego1 juego1;
+    Juego1Bonito juego1;
     
     /**
      * Creates new form GUIInicio
@@ -160,7 +160,7 @@ public class GUIInicio extends javax.swing.JFrame {
         this.setVisible(false);
         tiempo = new Tiempo(this, true);
         tiempo.setVisible(true);
-        juego1 = new GUIJuego1(this, true);
+        juego1 = new Juego1Bonito(this, true);
         juego1.setVisible(true);
         
     }//GEN-LAST:event_IniciarJuegoActionPerformed
