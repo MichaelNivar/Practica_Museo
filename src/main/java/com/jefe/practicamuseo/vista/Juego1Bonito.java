@@ -8,11 +8,15 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.lang.reflect.Array;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -114,7 +118,7 @@ public final class Juego1Bonito extends javax.swing.JDialog {
     }
     
     private void fotos(){//los autores se meterian al azar
-        obras.put(autores.get(0),"C:\\Users\\picperru\\Documents\\NetBeansProjects\\Tema9\\src\\main\\java\\Recursos\\Imagen1.jpg");
+        obras.put(autores.get(0),"https://drive.google.com/file/d/1IYtv05B-YVI_3DU13JofSSz1-0fCYf72/view?usp=drive_link.jpg");
         obras.put(autores.get(1),"C:\\Users\\picperru\\Documents\\NetBeansProjects\\Tema9\\src\\main\\java\\Recursos\\Imagen2.jpeg");
         obras.put(autores.get(2),"C:\\Users\\picperru\\Documents\\NetBeansProjects\\Tema9\\src\\main\\java\\Recursos\\imagen3.jpg");
         obras.put(autores.get(3),"C:\\Users\\picperru\\Documents\\NetBeansProjects\\Tema9\\src\\main\\java\\Recursos\\Imagen4.jpg");
@@ -143,6 +147,20 @@ public final class Juego1Bonito extends javax.swing.JDialog {
 //            numeros[j] = temp;
 //        }
 //    }
+    
+//    private void fotoPoner(String url){
+//        Image imagen=null;
+//        URL urla;
+//        try{
+//            urla= new URL("https:\\www.salirconarte.com\\wp-content\\uploads\\2017\\06\\orig_64571-750x430.jpg");
+//            imagen = ImageIO.read(urla).getScaledInstance(this.jLabel1.getWidth(), this.jLabel1.getHeight(), Image.SCALE_SMOOTH);
+//            this.jLabel1.setIcon(new ImageIcon(imagen));
+//        }catch(MalformedURLException ex){
+//            ex.printStackTrace();
+//        }catch(IOException ex){
+//            ex.printStackTrace();
+//        }
+//    }
 
     
     
@@ -153,7 +171,9 @@ public final class Juego1Bonito extends javax.swing.JDialog {
         System.out.println(auutor);
         String pipi=obras.get(auutor);
         imagenActual=pipi;
+        System.out.println(pipi);
         cont++;
+//        fotoPoner(pipi);
         ImageIcon ima1 = new ImageIcon(pipi);
         Image bien1 = ima1.getImage().getScaledInstance(this.jLabel1.getWidth(), this.jLabel1.getHeight(), Image.SCALE_SMOOTH);
         this.jLabel1.setIcon(new ImageIcon(bien1));
@@ -161,7 +181,6 @@ public final class Juego1Bonito extends javax.swing.JDialog {
         }else{
             
         }
-        
     }
 
     /**

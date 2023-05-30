@@ -4,10 +4,17 @@
  */
 package com.jefe.practicamuseo.vista;
 
+import java.net.URL;
+
 /**
  *
  * @author serbusmi
  */
 public class Prueba {
-    
+    public static void main(String[] args) {
+        String nombre="LaNocheEstrellada";
+        URL ruta=Prueba.class.getResource(nombre);
+        
+        System.out.println(ruta.getPath());
+    }
 }
