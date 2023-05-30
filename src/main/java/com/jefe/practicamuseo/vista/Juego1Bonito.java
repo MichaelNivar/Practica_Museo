@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -20,13 +22,16 @@ import javax.swing.JOptionPane;
  */
 public final class Juego1Bonito extends javax.swing.JDialog {
 
-    ArrayList<String> fotos=new ArrayList<>();
+    Map<String, String>obras=new HashMap<>();
+    ArrayList<String> autores=new ArrayList<>();
+    private String imagenActual;
+    private String AutorActual;
 
     public Juego1Bonito pepe;
-    int totnum=fotos.size();
-    int[] numeros= new int[totnum];
+    int totnum=0;
+    int[] numeros; 
     Random random=new Random();
-    int cont=1;//esto tiene que ser 0 creo
+    int cont=0;//esto tiene que ser 0 creo
     
     /**
      * Creates new form Juego1Bonito
@@ -34,59 +39,129 @@ public final class Juego1Bonito extends javax.swing.JDialog {
     public Juego1Bonito(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        meterAutores();
+        Botones();
         fotos();
-        autores();
         array();
-        desordenarArray();
         llamadaFoto();
         Autor1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(pepe, "Error");
-                Autor1.setBackground(Color.red);
+                if(Autor1.getText().equals(AutorActual)){
+                    JOptionPane.showMessageDialog(pepe, "Has acertado");
+                    Autor1.setBackground(Color.green);
+                }else{
+                    JOptionPane.showMessageDialog(pepe, "Has fallado");
+                    Autor1.setBackground(Color.red);
+                }
+                llamadaFoto();
+            }
+        });
+        Autor2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(Autor2.getText().equals(AutorActual)){
+                    JOptionPane.showMessageDialog(pepe, "Has acertado");
+                    Autor2.setBackground(Color.green);
+                }else{
+                    JOptionPane.showMessageDialog(pepe, "Has fallado");
+                    Autor2.setBackground(Color.red);
+                }
+                llamadaFoto();
+            }
+        });
+        Autor3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(Autor3.getText().equals(AutorActual)){
+                    JOptionPane.showMessageDialog(pepe, "Has acertado");
+                    Autor3.setBackground(Color.green);
+                }else{
+                    JOptionPane.showMessageDialog(pepe, "Has fallado");
+                    Autor3.setBackground(Color.red);
+                }
+                llamadaFoto();
+            }
+        });
+        Autor4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(Autor4.getText().equals(AutorActual)){
+                    JOptionPane.showMessageDialog(pepe, "Has acertado");
+                    Autor4.setBackground(Color.green);
+                }else{
+                    JOptionPane.showMessageDialog(pepe, "Has fallado");
+                    Autor4.setBackground(Color.red);
+                }
                 llamadaFoto();
             }
         });
     }
     
     //esto seria una llamada a la base de datos desde su apartado para rellenar el array
-    public void autores(){
-        this.Autor1.setText("pepe");
-        this.Autor2.setText("pepa");
-        this.Autor3.setText("pepi");
-        this.Autor4.setText("pepo");
+    private void Botones(){
+        this.Autor1.setText(autores.get(0));//los botones tienen el exacto nombre por lo que se pueden comparar
+        this.Autor2.setText(autores.get(1));
+        this.Autor3.setText(autores.get(2));
+        this.Autor4.setText(autores.get(3));
     }
     
-    public void fotos(){
-        fotos.add("C:\\Users\\picperru\\Documents\\NetBeansProjects\\Tema9\\src\\main\\java\\Recursos\\Imagen1.jpg");
-        fotos.add("C:\\Users\\picperru\\Documents\\NetBeansProjects\\Tema9\\src\\main\\java\\Recursos\\Imagen2.jpeg");
-        fotos.add("C:\\Users\\picperru\\Documents\\NetBeansProjects\\Tema9\\src\\main\\java\\Recursos\\imagen3.jpg");
-        fotos.add("C:\\Users\\picperru\\Documents\\NetBeansProjects\\Tema9\\src\\main\\java\\Recursos\\Imagen4.jpg");
+    private void meterAutores(){//aqui meteriamos todos los autores con una llamada a BD
+        autores.add("Van Gogh");
+        autores.add("Schile");
+        autores.add("Renoir");
+        autores.add("Bernini");
     }
     
-    public void array(){//se generan los mismo numero que fotos haya, luego se desordenan y cogen un par
-        for (int i = 1; i <= totnum; i++) {
+    private void fotos(){//los autores se meterian al azar
+        obras.put(autores.get(0),"C:\\Users\\picperru\\Documents\\NetBeansProjects\\Tema9\\src\\main\\java\\Recursos\\Imagen1.jpg");
+        obras.put(autores.get(1),"C:\\Users\\picperru\\Documents\\NetBeansProjects\\Tema9\\src\\main\\java\\Recursos\\Imagen2.jpeg");
+        obras.put(autores.get(2),"C:\\Users\\picperru\\Documents\\NetBeansProjects\\Tema9\\src\\main\\java\\Recursos\\imagen3.jpg");
+        obras.put(autores.get(3),"C:\\Users\\picperru\\Documents\\NetBeansProjects\\Tema9\\src\\main\\java\\Recursos\\Imagen4.jpg");
+        totnum=obras.size();
+    }
+    
+    private void array(){//se generan los mismo numero que fotos haya, luego se desordenan y cogen un par
+        numeros= new int[totnum];
+        for (int i = 0; i < totnum; i++) {
             numeros[i]=i;   
         }
     }
     
-    public void desordenarArray(){
-        for (int i = numeros.length - 1; i > 0; i--) {
-            int j = random.nextInt(i + 1);
-            int temp = numeros[i];
-            numeros[i] = numeros[j];
-            numeros[j] = temp;
-        }
+    private void colorNormal(){
+        Autor1.setBackground(Color.white);
+        Autor2.setBackground(Color.white);
+        Autor3.setBackground(Color.white);
+        Autor4.setBackground(Color.white);        
     }
+    
+//    public void desordenarArray(){//de momento no usado
+//        for (int i = numeros.length - 1; i > 0; i--) {
+//            int j = random.nextInt(i + 1);
+//            int temp = numeros[i];
+//            numeros[i] = numeros[j];
+//            numeros[j] = temp;
+//        }
+//    }
 
     
     
     public void llamadaFoto(){
-        String pipi=fotos.get(cont);//numeros[cont]+1
+        if(cont<4){
+        String auutor=autores.get(numeros[cont]);
+        AutorActual=auutor;
+        System.out.println(auutor);
+        String pipi=obras.get(auutor);
+        imagenActual=pipi;
         cont++;
         ImageIcon ima1 = new ImageIcon(pipi);
         Image bien1 = ima1.getImage().getScaledInstance(this.jLabel1.getWidth(), this.jLabel1.getHeight(), Image.SCALE_SMOOTH);
         this.jLabel1.setIcon(new ImageIcon(bien1));
+        colorNormal();
+        }else{
+            
+        }
+        
     }
 
     /**
